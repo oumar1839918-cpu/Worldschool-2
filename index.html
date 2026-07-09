@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorldSchool — Trouvez l'établissement qu'il vous faut</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0A1628;
+  --navy: #1E3A5F;
+  --blue: #2563EB;
+  --blue-light: #3B82F6;
+  --blue-pale: #EFF6FF;
+  --gold: #F59E0B;
+  --surface: #F8FAFC;
+  --white: #ffffff;
+  --slate: #64748B;
+  --slate-light: #94A3B8;
+  --border: #E2E8F0;
+  --border-dark: #CBD5E1;
+  --success: #10B981;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 1px 3px rgba(10,22,40,0.08), 0 1px 2px rgba(10,22,40,0.04);
+  --shadow: 0 4px 16px rgba(10,22,40,0.08), 0 2px 6px rgba(10,22,40,0.05);
+  --shadow-lg: 0 20px 48px rgba(10,22,40,0.12), 0 8px 16px rgba(10,22,40,0.06);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--ink);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ─────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  height: 68px;
+  display: flex; align-items: center;
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; gap: 32px; width: 100%;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; flex-shrink: 0;
+}
+.logo-mark {
+  width: 36px; height: 36px; background: var(--blue);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+}
+.logo-mark svg { width: 20px; height: 20px; fill: white; }
+.logo-text { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.125rem; color: var(--ink); }
+.logo-text span { color: var(--blue); }
+
+.nav-links {
+  display: flex; align-items: center; gap: 4px; flex: 1;
+  list-style: none;
+}
+.nav-links a {
+  text-decoration: none; color: var(--slate); font-size: 0.875rem; font-weight: 500;
+  padding: 6px 12px; border-radius: 8px; transition: all 0.15s;
+}
+.nav-links a:hover { color: var(--ink); background: var(--surface); }
+.nav-links a.active { color: var(--blue); }
+
+.nav-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 9px 18px; border-radius: 9px; font-size: 0.875rem; font-weight: 600;
+  cursor: pointer; border: none; text-decoration: none; transition: all 0.18s; white-space: nowrap;
+}
+.btn-ghost { background: transparent; color: var(--slate); }
+.btn-ghost:hover { background: var(--surface); color: var(--ink); }
+.btn-outline { background: transparent; color: var(--blue); border: 1.5px solid var(--blue); }
+.btn-outline:hover { background: var(--blue-pale); }
+.btn-primary { background: var(--blue); color: white; }
+.btn-primary:hover { background: #1D4ED8; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
+.btn-secondary { background: var(--ink); color: white; }
+.btn-secondary:hover { background: var(--navy); }
+.btn-sm { padding: 7px 14px; font-size: 0.8rem; }
+.btn-lg { padding: 14px 28px; font-size: 1rem; }
+.btn-xl { padding: 16px 32px; font-size: 1.05rem; }
+
+/* ── HERO ─────────────────────────────── */
+.hero {
+  padding: 140px 24px 100px;
+  background: linear-gradient(165deg, #f0f6ff 0%, var(--white) 50%, #f8f4ff 100%);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(37,99,235,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: -150px; left: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(99,102,241,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 860px; margin: 0 auto; text-align: center; position: relative; z-index: 1;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--blue-pale); color: var(--blue);
+  padding: 6px 14px; border-radius: 100px;
+  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.02em;
+  border: 1px solid rgba(37,99,235,0.15);
+  margin-bottom: 28px;
+}
+.hero-badge .dot { width: 6px; height: 6px; background: var(--blue); border-radius: 50%; }
+.hero h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 800; line-height: 1.15;
+  color: var(--ink); letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.hero h1 em { font-style: normal; color: var(--blue); }
+.hero p {
+  font-size: 1.1rem; color: var(--slate); max-width: 580px;
+  margin: 0 auto 44px; font-weight: 400; line-height: 1.7;
+}
+
+/* ── SEARCH BOX ─────────────────────────────── */
+.search-box {
+  background: var(--white);
+  border: 1.5px solid var(--border-dark);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  padding: 8px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.2s;
+}
+.search-box:focus-within {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 4px rgba(37,99,235,0.08), var(--shadow-lg);
+}
+.search-row {
+  display: flex; align-items: center; gap: 4px;
+}
+.search-field {
+  display: flex; align-items: center; gap: 10px;
+  flex: 1; padding: 10px 16px;
+  border-right: 1px solid var(--border);
+}
+.search-field:last-of-type { border-right: none; }
+.search-field svg { color: var(--slate-light); flex-shrink: 0; }
+.search-field input, .search-field select {
+  border: none; outline: none; background: transparent;
+  font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--ink);
+  width: 100%;
+}
+.search-field input::placeholder, .search-field select { color: var(--slate); }
+.search-field select { cursor: pointer; }
+.search-btn {
+  background: var(--blue); color: white;
+  border: none; border-radius: 10px; cursor: pointer;
+  padding: 13px 24px; font-size: 0.9rem; font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  display: flex; align-items: center; gap: 8px;
+  white-space: nowrap; transition: all 0.18s; flex-shrink: 0;
+}
+.search-btn:hover { background: #1D4ED8; }
+
+.search-filters {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  font-size: 0.8rem; color: var(--slate);
+}
+.filter-chip {
+  padding: 5px 12px; border-radius: 100px;
+  background: var(--surface); border: 1px solid var(--border);
+  cursor: pointer; font-size: 0.8rem; color: var(--slate);
+  transition: all 0.15s; font-family: 'Inter', sans-serif;
+}
+.filter-chip:hover, .filter-chip.active {
+  background: var(--blue-pale); color: var(--blue); border-color: rgba(37,99,235,0.3);
+}
+.search-hint { color: var(--slate-light); font-size: 0.8rem; margin-right: auto; }
+
+.hero-stats {
+  display: flex; align-items: center; justify-content: center; gap: 40px;
+  margin-top: 48px; flex-wrap: wrap;
+}
+.stat { text-align: center; }
+.stat-num {
+  font-family: 'Sora', sans-serif; font-size: 1.6rem; font-weight: 700;
+  color: var(--ink); display: block;
+}
+.stat-label { font-size: 0.8rem; color: var(--slate); }
+.stat-divider { width: 1px; height: 40px; background: var(--border); }
+
+/* ── SECTIONS ─────────────────────────────── */
+section { padding: 96px 24px; }
+.container { max-width: 1200px; margin: 0 auto; }
+.section-eyebrow {
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--blue); margin-bottom: 14px;
+}
+.section-title {
+  font-family: 'Sora', sans-serif; font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700; color: var(--ink); line-height: 1.25;
+  letter-spacing: -0.02em; margin-bottom: 16px;
+}
+.section-sub {
+  font-size: 1rem; color: var(--slate); max-width: 520px; line-height: 1.7;
+}
+.section-header { margin-bottom: 56px; }
+.section-header.centered { text-align: center; }
+.section-header.centered .section-sub { margin: 0 auto; }
+
+/* ── FEATURED SCHOOLS ─────────────────────────────── */
+.featured { background: var(--surface); }
+.schools-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;
+}
+.school-card {
+  background: var(--white); border-radius: var(--radius-lg);
+  border: 1px solid var(--border); overflow: hidden;
+  transition: all 0.22s; cursor: pointer;
+  text-decoration: none; color: inherit; display: block;
+}
+.school-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+.school-cover {
+  height: 160px; position: relative; overflow: hidden;
+}
+.cover-gradient {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem;
+}
+.school-badge-level {
+  position: absolute; top: 12px; right: 12px;
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(8px);
+  padding: 4px 10px; border-radius: 100px;
+  font-size: 0.72rem; font-weight: 600; color: var(--navy);
+}
+.school-body { padding: 20px; }
+.school-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.school-type {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--slate-light);
+}
+.school-rating {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 0.82rem; font-weight: 600; color: var(--ink);
+}
+.school-rating svg { color: var(--gold); }
+.school-name {
+  font-family: 'Sora', sans-serif; font-weight: 700;
+  font-size: 1.05rem; color: var(--ink); margin-bottom: 6px;
+  line-height: 1.3;
+}
+.school-loc {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 0.82rem; color: var(--slate); margin-bottom: 16px;
+}
+.school-loc svg { flex-shrink: 0; }
+.school-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.tag {
+  padding: 3px 10px; border-radius: 100px; font-size: 0.72rem; font-weight: 500;
+  background: var(--blue-pale); color: var(--blue);
+}
+.tag.green { background: #ECFDF5; color: #059669; }
+.tag.purple { background: #F5F3FF; color: #7C3AED; }
+.school-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 16px; border-top: 1px solid var(--border);
+  font-size: 0.8rem; color: var(--slate);
+}
+.school-students { display: flex; align-items: center; gap: 5px; }
+
+/* ── HOW IT WORKS ─────────────────────────────── */
+.steps-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px;
+}
+.step { position: relative; }
+.step-number {
+  width: 48px; height: 48px; border-radius: 14px;
+  background: var(--blue); color: white;
+  font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+}
+.step h3 {
+  font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1rem;
+  color: var(--ink); margin-bottom: 10px;
+}
+.step p { font-size: 0.875rem; color: var(--slate); line-height: 1.7; }
+.step-connector {
+  position: absolute; top: 24px; left: 48px; right: -32px;
+  height: 1px; background: linear-gradient(90deg, var(--border), transparent);
+}
+
+/* ── FEATURES ─────────────────────────────── */
+.features { background: var(--ink); }
+.features .section-eyebrow { color: #93C5FD; }
+.features .section-title { color: var(--white); }
+.features .section-sub { color: #94A3B8; }
+.features-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;
+}
+.feature-card {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg); padding: 28px; transition: all 0.2s;
+}
+.feature-card:hover {
+  background: rgba(255,255,255,0.08); border-color: rgba(37,99,235,0.4);
+  transform: translateY(-2px);
+}
+.feature-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: rgba(37,99,235,0.2); border: 1px solid rgba(37,99,235,0.3);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+}
+.feature-icon svg { color: #93C5FD; }
+.feature-card h3 {
+  font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.95rem;
+  color: white; margin-bottom: 10px;
+}
+.feature-card p { font-size: 0.85rem; color: #94A3B8; line-height: 1.7; }
+
+/* ── CATEGORIES ─────────────────────────────── */
+.categories-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px;
+}
+.cat-card {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: var(--radius); padding: 24px 16px; text-align: center;
+  cursor: pointer; transition: all 0.18s; text-decoration: none;
+  display: block; color: inherit;
+}
+.cat-card:hover {
+  border-color: var(--blue); background: var(--blue-pale);
+  transform: translateY(-2px); box-shadow: var(--shadow);
+}
+.cat-icon { font-size: 2rem; margin-bottom: 10px; display: block; }
+.cat-name { font-weight: 600; font-size: 0.85rem; color: var(--ink); margin-bottom: 4px; }
+.cat-count { font-size: 0.75rem; color: var(--slate-light); }
+.cat-card:hover .cat-name { color: var(--blue); }
+
+/* ── COMPARE PREVIEW ─────────────────────────────── */
+.compare-section { background: var(--surface); }
+.compare-table-wrap { overflow-x: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+.compare-table {
+  width: 100%; border-collapse: collapse;
+  background: var(--white);
+}
+.compare-table th {
+  background: var(--ink); color: white; padding: 18px 20px;
+  text-align: left; font-size: 0.85rem; font-weight: 600;
+}
+.compare-table th:first-child { border-radius: var(--radius) 0 0 0; width: 180px; }
+.compare-table th:last-child { border-radius: 0 var(--radius) 0 0; }
+.compare-table td {
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+  font-size: 0.85rem; vertical-align: middle;
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table td:first-child { font-weight: 600; color: var(--slate); }
+.compare-table tr:hover td { background: var(--surface); }
+.check { color: var(--success); font-size: 1rem; }
+.cross { color: #EF4444; font-size: 1rem; }
+.stars { color: var(--gold); }
+.school-col-header {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.school-col-name { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.95rem; }
+.school-col-type { font-size: 0.72rem; opacity: 0.7; font-weight: 400; }
+
+/* ── MAP PREVIEW ─────────────────────────────── */
+.map-preview-wrap {
+  position: relative; border-radius: var(--radius-lg); overflow: hidden;
+  height: 440px; box-shadow: var(--shadow-lg); background: #E8F0FE;
+  display: flex; align-items: center; justify-content: center;
+}
+.map-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #dce8f7 0%, #c8daf0 50%, #b8cfe8 100%);
+}
+.map-grid {
+  position: absolute; inset: 0; opacity: 0.3;
+  background-image:
+    linear-gradient(rgba(30,58,95,0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30,58,95,0.3) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.map-roads {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(45deg, transparent 35%, rgba(255,255,255,0.6) 35%, rgba(255,255,255,0.6) 37%, transparent 37%),
+    linear-gradient(-45deg, transparent 60%, rgba(255,255,255,0.5) 60%, rgba(255,255,255,0.5) 62%, transparent 62%),
+    linear-gradient(90deg, transparent 20%, rgba(255,255,255,0.4) 20%, rgba(255,255,255,0.4) 22%, transparent 22%),
+    linear-gradient(0deg, transparent 45%, rgba(255,255,255,0.5) 45%, rgba(255,255,255,0.5) 47%, transparent 47%);
+}
+.map-pin {
+  position: absolute; display: flex; flex-direction: column; align-items: center;
+  cursor: pointer; transition: transform 0.2s; z-index: 2;
+}
+.map-pin:hover { transform: scale(1.1); }
+.pin-dot {
+  width: 36px; height: 36px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
+  display: flex; align-items: center; justify-content: center;
+  background: var(--blue); box-shadow: 0 4px 12px rgba(37,99,235,0.4);
+  border: 2px solid white;
+}
+.pin-dot svg { transform: rotate(45deg); color: white; }
+.pin-label {
+  margin-top: 6px; background: white; border-radius: 8px; padding: 4px 10px;
+  font-size: 0.72rem; font-weight: 600; color: var(--ink); white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+}
+.map-ui {
+  position: absolute; top: 16px; left: 16px; right: 16px;
+  display: flex; justify-content: space-between; align-items: flex-start; z-index: 3;
+}
+.map-search-bar {
+  background: white; border-radius: 10px; padding: 10px 16px;
+  display: flex; align-items: center; gap: 8px; box-shadow: var(--shadow);
+  font-size: 0.85rem; color: var(--slate); max-width: 280px; width: 100%;
+}
+.map-controls {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.map-ctrl-btn {
+  width: 36px; height: 36px; background: white; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow); cursor: pointer; font-size: 1.1rem; font-weight: 600; color: var(--ink);
+  border: none; font-family: 'Inter', sans-serif;
+}
+.map-ctrl-btn:hover { background: var(--surface); }
+
+/* ── TESTIMONIALS ─────────────────────────────── */
+.testimonials-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;
+}
+.testimonial {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 28px; position: relative;
+  transition: box-shadow 0.2s;
+}
+.testimonial:hover { box-shadow: var(--shadow); }
+.quote-mark {
+  font-size: 3rem; color: var(--blue-pale); font-family: Georgia, serif;
+  line-height: 1; margin-bottom: -10px; display: block;
+}
+.testimonial-text {
+  font-size: 0.9rem; color: var(--slate); line-height: 1.75;
+  margin-bottom: 20px; font-style: italic;
+}
+.testimonial-author { display: flex; align-items: center; gap: 12px; }
+.author-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; font-weight: 700; color: white;
+  flex-shrink: 0;
+}
+.author-name { font-weight: 700; font-size: 0.875rem; color: var(--ink); }
+.author-role { font-size: 0.75rem; color: var(--slate-light); }
+
+/* ── CTA ─────────────────────────────── */
+.cta-section {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--ink) 100%);
+  position: relative; overflow: hidden; text-align: center;
+}
+.cta-section::before {
+  content: '';
+  position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 400px;
+  background: radial-gradient(ellipse, rgba(37,99,235,0.2) 0%, transparent 70%);
+}
+.cta-section .section-title { color: white; max-width: 540px; margin: 0 auto 16px; }
+.cta-section .section-sub { color: #94A3B8; margin: 0 auto 40px; }
+.cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* ── FOOTER ─────────────────────────────── */
+footer {
+  background: var(--ink); padding: 72px 24px 40px;
+  color: #94A3B8;
+}
+.footer-inner { max-width: 1200px; margin: 0 auto; }
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+  margin-bottom: 56px;
+}
+.footer-brand { max-width: 280px; }
+.footer-brand .logo { margin-bottom: 16px; }
+.footer-brand .logo-text { color: white; }
+.footer-brand p { font-size: 0.85rem; line-height: 1.7; color: #64748B; }
+.footer-col h4 {
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #475569; margin-bottom: 16px;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col a {
+  text-decoration: none; font-size: 0.85rem; color: #64748B;
+  transition: color 0.15s;
+}
+.footer-col a:hover { color: #CBD5E1; }
+.footer-bottom {
+  padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: gap;
+  font-size: 0.8rem; gap: 16px; flex-wrap: wrap;
+}
+.footer-bottom p { color: #475569; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { color: #475569; text-decoration: none; transition: color 0.15s; }
+.footer-links a:hover { color: #64748B; }
+
+/* ── DETAIL PAGE ─────────────────────────────── */
+#detail-page { display: none; }
+#detail-page.active { display: block; }
+#home-page { display: block; }
+#home-page.hidden { display: none; }
+
+.detail-hero {
+  background: var(--ink); padding: 100px 24px 0;
+  position: relative; overflow: hidden;
+}
+.detail-hero-cover {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #0A1628 0%, #1E3A5F 100%);
+  opacity: 0.95;
+}
+.detail-hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+.back-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: rgba(255,255,255,0.6); font-size: 0.85rem; text-decoration: none;
+  margin-bottom: 32px; transition: color 0.15s; cursor: pointer; border: none; background: none; font-family: 'Inter', sans-serif;
+}
+.back-link:hover { color: white; }
+.detail-header { display: flex; align-items: flex-start; gap: 24px; margin-bottom: 0; }
+.detail-logo-box {
+  width: 80px; height: 80px; border-radius: 18px; background: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.2rem; flex-shrink: 0; box-shadow: var(--shadow-lg);
+}
+.detail-title-group { flex: 1; }
+.detail-verified {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(16,185,129,0.15); color: #6EE7B7;
+  padding: 3px 10px; border-radius: 100px; font-size: 0.72rem; font-weight: 600;
+  margin-bottom: 8px;
+}
+.detail-name {
+  font-family: 'Sora', sans-serif; font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800; color: white; margin-bottom: 8px; line-height: 1.2;
+}
+.detail-meta-row {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-bottom: 20px;
+}
+.detail-meta-row span { display: flex; align-items: center; gap: 5px; }
+.detail-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0; }
+.detail-tabs {
+  display: flex; gap: 0; margin-top: 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.detail-tab {
+  padding: 14px 20px; color: rgba(255,255,255,0.5); font-size: 0.875rem; font-weight: 500;
+  cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s;
+  border: none; background: none; font-family: 'Inter', sans-serif;
+  margin-bottom: -1px;
+}
+.detail-tab.active { color: white; border-bottom-color: var(--blue); }
+.detail-tab:hover:not(.active) { color: rgba(255,255,255,0.8); }
+
+.detail-body { max-width: 1100px; margin: 0 auto; padding: 48px 24px; }
+.detail-grid { display: grid; grid-template-columns: 1fr 340px; gap: 32px; align-items: start; }
+.detail-main { display: flex; flex-direction: column; gap: 28px; }
+.detail-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 28px;
+}
+.detail-card h3 {
+  font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1rem;
+  color: var(--ink); margin-bottom: 20px; padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.info-item {}
+.info-label { font-size: 0.75rem; font-weight: 600; color: var(--slate-light); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.info-value { font-size: 0.9rem; color: var(--ink); font-weight: 500; }
+.amenity-list { display: flex; flex-direction: column; gap: 10px; }
+.amenity-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px; border-radius: 10px; background: var(--surface);
+  font-size: 0.85rem;
+}
+.amenity-name { display: flex; align-items: center; gap: 8px; color: var(--ink); font-weight: 500; }
+.badge-yes { background: #ECFDF5; color: #059669; padding: 3px 10px; border-radius: 100px; font-size: 0.75rem; font-weight: 600; }
+.badge-no { background: #FEF2F2; color: #DC2626; padding: 3px 10px; border-radius: 100px; font-size: 0.75rem; font-weight: 600; }
+
+.sidebar-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 24px; margin-bottom: 16px;
+}
+.sidebar-card:last-child { margin-bottom: 0; }
+.sidebar-card h4 {
+  font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.875rem;
+  color: var(--ink); margin-bottom: 16px;
+}
+.contact-list { display: flex; flex-direction: column; gap: 12px; }
+.contact-item {
+  display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--slate);
+}
+.contact-icon {
+  width: 32px; height: 32px; border-radius: 8px; background: var(--blue-pale);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.contact-icon svg { color: var(--blue); }
+.rating-display { text-align: center; padding: 20px 0; }
+.rating-big {
+  font-family: 'Sora', sans-serif; font-size: 3rem; font-weight: 800; color: var(--ink);
+}
+.rating-stars { font-size: 1.3rem; color: var(--gold); margin: 4px 0; }
+.rating-count { font-size: 0.8rem; color: var(--slate-light); }
+.rating-bars { margin-top: 20px; display: flex; flex-direction: column; gap: 6px; }
+.rating-bar-row { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--slate); }
+.rating-bar { flex: 1; height: 6px; background: var(--surface); border-radius: 3px; overflow: hidden; }
+.rating-bar-fill { height: 100%; background: var(--gold); border-radius: 3px; transition: width 1s ease; }
+
+/* ── ADMIN MODAL ─────────────────────────────── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(10,22,40,0.6); backdrop-filter: blur(8px);
+  align-items: center; justify-content: center; padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: white; border-radius: 20px; width: 100%; max-width: 480px;
+  box-shadow: 0 32px 80px rgba(10,22,40,0.25); overflow: hidden; animation: modal-in 0.2s ease;
+}
+@keyframes modal-in { from { opacity: 0; transform: scale(0.96) translateY(16px); } to { opacity: 1; transform: none; } }
+.modal-header {
+  padding: 24px 28px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.modal-title { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--ink); }
+.modal-close {
+  width: 32px; height: 32px; border-radius: 8px; border: none;
+  background: var(--surface); cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: var(--slate); font-size: 1rem; font-family: 'Inter', sans-serif;
+}
+.modal-body { padding: 28px; display: flex; flex-direction: column; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-label { font-size: 0.8rem; font-weight: 600; color: var(--slate); }
+.form-input {
+  border: 1.5px solid var(--border); border-radius: 10px;
+  padding: 10px 14px; font-family: 'Inter', sans-serif; font-size: 0.875rem;
+  color: var(--ink); outline: none; transition: border-color 0.15s; background: white;
+}
+.form-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,0.08); }
+.form-divider {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.8rem; color: var(--slate-light);
+}
+.form-divider::before, .form-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+.modal-footer { padding: 20px 28px; border-top: 1px solid var(--border); display: flex; gap: 10px; }
+.modal-footer .btn { flex: 1; justify-content: center; }
+
+/* ── ADMIN DASHBOARD ─────────────────────────────── */
+#admin-page { display: none; }
+#admin-page.active { display: flex; }
+.admin-layout { display: flex; min-height: 100vh; padding-top: 68px; }
+.admin-sidebar {
+  width: 260px; flex-shrink: 0; background: var(--ink);
+  padding: 24px 16px; display: flex; flex-direction: column; gap: 4px;
+  position: sticky; top: 68px; height: calc(100vh - 68px); overflow-y: auto;
+}
+.admin-nav-label {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: #475569; padding: 16px 12px 8px; margin-top: 8px;
+}
+.admin-nav-label:first-child { margin-top: 0; }
+.admin-nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: 10px; cursor: pointer;
+  color: #64748B; font-size: 0.875rem; font-weight: 500; transition: all 0.15s;
+  border: none; background: none; font-family: 'Inter', sans-serif; width: 100%; text-align: left;
+}
+.admin-nav-item:hover { background: rgba(255,255,255,0.06); color: #CBD5E1; }
+.admin-nav-item.active { background: rgba(37,99,235,0.2); color: #93C5FD; }
+.admin-nav-item svg { width: 16px; height: 16px; }
+
+.admin-content { flex: 1; padding: 32px; background: var(--surface); overflow-y: auto; }
+.admin-page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 12px; }
+.admin-page-title { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.3rem; color: var(--ink); }
+.admin-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 28px; }
+.admin-stat-card {
+  background: white; border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 20px 24px;
+}
+.admin-stat-num {
+  font-family: 'Sora', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--ink);
+  margin-bottom: 4px;
+}
+.admin-stat-label { font-size: 0.8rem; color: var(--slate); }
+.admin-stat-change { font-size: 0.75rem; color: var(--success); font-weight: 600; margin-top: 4px; }
+.admin-table-card {
+  background: white; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;
+}
+.admin-table-head {
+  padding: 18px 24px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.admin-table-title { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--ink); }
+.admin-table { width: 100%; border-collapse: collapse; }
+.admin-table th {
+  background: var(--surface); padding: 12px 16px; text-align: left;
+  font-size: 0.75rem; font-weight: 700; color: var(--slate);
+  text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border);
+}
+.admin-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 0.85rem; color: var(--ink); }
+.admin-table tr:last-child td { border-bottom: none; }
+.admin-table tr:hover td { background: var(--surface); }
+.status-badge {
+  padding: 3px 10px; border-radius: 100px; font-size: 0.72rem; font-weight: 600;
+  display: inline-block;
+}
+.status-active { background: #ECFDF5; color: #059669; }
+.status-pending { background: #FFFBEB; color: #D97706; }
+.status-inactive { background: #FEF2F2; color: #DC2626; }
+.row-actions { display: flex; gap: 6px; }
+.action-btn {
+  width: 28px; height: 28px; border-radius: 7px; border: 1px solid var(--border);
+  background: white; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: var(--slate); transition: all 0.15s;
+}
+.action-btn:hover { background: var(--blue); border-color: var(--blue); color: white; }
+
+/* ── UTILITIES ─────────────────────────────── */
+.bg-surface { background: var(--surface); }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.gap-2 { gap: 8px; }
+.mt-4 { margin-top: 16px; }
+.text-center { text-align: center; }
+.view-all {
+  display: flex; align-items: center; justify-content: center; margin-top: 40px;
+}
+.inline-svg { display: inline-flex; }
+
+/* ── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 900px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .detail-grid { grid-template-columns: 1fr; }
+  .search-row { flex-wrap: wrap; }
+  .search-field { border-right: none; border-bottom: 1px solid var(--border); }
+  .search-field:last-of-type { border-bottom: none; }
+  .admin-sidebar { display: none; }
+  .info-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .hero { padding: 110px 16px 70px; }
+  section { padding: 64px 16px; }
+  .hero-stats { gap: 20px; }
+  .stat-divider { display: none; }
+  .compare-section { overflow: hidden; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ────────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo" onclick="showPage('home')">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5M2 18l10 5 10-5"/></svg>
+      </div>
+      <span class="logo-text">World<span>School</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showPage('home')" class="active">Accueil</a></li>
+      <li><a href="#recherche">Rechercher</a></li>
+      <li><a href="#carte">Carte</a></li>
+      <li><a href="#comparer">Comparer</a></li>
+      <li><a href="#">Blog</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn btn-ghost btn-sm" onclick="openModal('login')">Connexion</button>
+      <button class="btn btn-primary btn-sm" onclick="openModal('register')">Inscrire mon école</button>
+      <button class="btn btn-ghost btn-sm" onclick="showPage('admin')" title="Admin">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     HOME PAGE
+═══════════════════════════════════════════════ -->
+<div id="home-page">
+
+<!-- ── HERO ────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Plateforme nationale d'information scolaire
+    </div>
+    <h1>Trouvez l'<em>établissement</em><br>qu'il vous faut</h1>
+    <p>Comparez les écoles, collèges, lycées et universités en toute confiance. Des informations vérifiées, actualisées et accessibles pour chaque famille.</p>
+
+    <div class="search-box" id="recherche">
+      <div class="search-row">
+        <div class="search-field" style="flex:2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" placeholder="Nom de l'établissement…" id="search-name">
+        </div>
+        <div class="search-field">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <input type="text" placeholder="Ville ou quartier">
+        </div>
+        <div class="search-field">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          <select>
+            <option value="">Niveau</option>
+            <option>Maternelle</option>
+            <option>Primaire</option>
+            <option>Collège</option>
+            <option>Lycée</option>
+            <option>Université</option>
+            <option>Formation professionnelle</option>
+          </select>
+        </div>
+        <button class="search-btn" onclick="showPage('detail')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          Rechercher
+        </button>
+      </div>
+    </div>
+
+    <div class="search-filters">
+      <span class="search-hint">Recherches fréquentes :</span>
+      <button class="filter-chip active">Tous</button>
+      <button class="filter-chip">Public</button>
+      <button class="filter-chip">Privé</button>
+      <button class="filter-chip">Avec internat</button>
+      <button class="filter-chip">Cantine</button>
+      <button class="filter-chip">Transport</button>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">1 240</span><span class="stat-label">Établissements référencés</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">38</span><span class="stat-label">Villes couvertes</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">94%</span><span class="stat-label">Informations vérifiées</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">52 k</span><span class="stat-label">Familles aidées</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CATEGORIES ────────────────────────────────── -->
+<section style="padding: 72px 24px;">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-eyebrow">Explorer par type</div>
+      <h2 class="section-title">Quel établissement recherchez-vous ?</h2>
+    </div>
+    <div class="categories-grid">
+      <a class="cat-card" href="#"><span class="cat-icon">🏫</span><div class="cat-name">Maternelle</div><div class="cat-count">148 établissements</div></a>
+      <a class="cat-card" href="#"><span class="cat-icon">📚</span><div class="cat-name">Primaire</div><div class="cat-count">320 établissements</div></a>
+      <a class="cat-card" href="#"><span class="cat-icon">🏛️</span><div class="cat-name">Collège</div><div class="cat-count">214 établissements</div></a>
+      <a class="cat-card" href="#"><span class="cat-icon">🎓</span><div class="cat-name">Lycée</div><div class="cat-count">186 établissements</div></a>
+      <a class="cat-card" href="#"><span class="cat-icon">🏫</span><div class="cat-name">Université</div><div class="cat-count">42 établissements</div></a>
+      <a class="cat-card" href="#"><span class="cat-icon">🔧</span><div class="cat-name">Formation Pro</div><div class="cat-count">94 établissements</div></a>
+      <a class="cat-card" href="#"><span class="cat-icon">🌍</span><div class="cat-name">International</div><div class="cat-count">28 établissements</div></a>
+      <a class="cat-card" href="#"><span class="cat-icon">🕌</span><div class="cat-name">Franco-arabe</div><div class="cat-count">52 établissements</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURED SCHOOLS ────────────────────────────── -->
+<section class="featured" id="ecoles">
+  <div class="container">
+    <div class="section-header" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px">
+      <div>
+        <div class="section-eyebrow">Établissements à la une</div>
+        <h2 class="section-title">Les plus consultés cette semaine</h2>
+      </div>
+      <a href="#" class="btn btn-outline">Voir tous les établissements →</a>
+    </div>
+    <div class="schools-grid">
+
+      <a class="school-card" onclick="showPage('detail'); return false;" href="#">
+        <div class="school-cover">
+          <div class="cover-gradient" style="background: linear-gradient(135deg,#1E3A5F,#2563EB)">🏫</div>
+          <div class="school-badge-level">Collège · Lycée</div>
+        </div>
+        <div class="school-body">
+          <div class="school-meta">
+            <span class="school-type">Privé laïc</span>
+            <span class="school-rating">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              4.8
+            </span>
+          </div>
+          <div class="school-name">Complexe Scolaire Élite Excellence</div>
+          <div class="school-loc">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Conakry, Kaloum
+          </div>
+          <div class="school-tags">
+            <span class="tag">Internat</span>
+            <span class="tag green">Cantine</span>
+            <span class="tag purple">Transport</span>
+          </div>
+          <div class="school-foot">
+            <span class="school-students">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              1 240 élèves
+            </span>
+            <span>Fondé en 1998</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="school-card" onclick="showPage('detail'); return false;" href="#">
+        <div class="school-cover">
+          <div class="cover-gradient" style="background: linear-gradient(135deg,#065F46,#059669)">🎓</div>
+          <div class="school-badge-level">Lycée</div>
+        </div>
+        <div class="school-body">
+          <div class="school-meta">
+            <span class="school-type">Public</span>
+            <span class="school-rating">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              4.5
+            </span>
+          </div>
+          <div class="school-name">Lycée Scientifique de Ratoma</div>
+          <div class="school-loc">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Conakry, Ratoma
+          </div>
+          <div class="school-tags">
+            <span class="tag green">Cantine</span>
+            <span class="tag">Sciences</span>
+          </div>
+          <div class="school-foot">
+            <span class="school-students">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              2 080 élèves
+            </span>
+            <span>Fondé en 1975</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="school-card" onclick="showPage('detail'); return false;" href="#">
+        <div class="school-cover">
+          <div class="cover-gradient" style="background: linear-gradient(135deg,#4C1D95,#7C3AED)">🏛️</div>
+          <div class="school-badge-level">Collège</div>
+        </div>
+        <div class="school-body">
+          <div class="school-meta">
+            <span class="school-type">Privé confessionnel</span>
+            <span class="school-rating">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              4.6
+            </span>
+          </div>
+          <div class="school-name">CS Elhadj Ismaël Diallo</div>
+          <div class="school-loc">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Conakry, Dixinn
+          </div>
+          <div class="school-tags">
+            <span class="tag">Franco-arabe</span>
+            <span class="tag green">Cantine</span>
+          </div>
+          <div class="school-foot">
+            <span class="school-students">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              860 élèves
+            </span>
+            <span>Fondé en 2005</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ────────────────────────────────── -->
+<section>
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-eyebrow">Comment ça marche</div>
+      <h2 class="section-title">Trouver la bonne école en 3 étapes</h2>
+      <p class="section-sub">Une recherche simple, des informations fiables, une décision éclairée.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Décrivez vos critères</h3>
+        <p>Indiquez la ville, le niveau scolaire, et vos préférences (public, privé, internat, filière…). Notre moteur de recherche filtre instantanément.</p>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Comparez les établissements</h3>
+        <p>Consultez les fiches détaillées, les avis de parents, les frais de scolarité et les programmes. Comparez jusqu'à 3 écoles côte à côte.</p>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Contactez directement</h3>
+        <p>Obtenez les coordonnées, l'itinéraire, les dates d'inscription et contactez l'établissement en un clic.</p>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <h3>Laissez votre avis</h3>
+        <p>Partagez votre expérience pour aider d'autres familles à prendre les meilleures décisions pour leurs enfants.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ────────────────────────────────── -->
+<section class="features">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Pourquoi WorldSchool</div>
+      <h2 class="section-title">Tout ce dont vous avez besoin<br>en un seul endroit</h2>
+      <p class="section-sub">Des outils pensés pour les familles qui veulent prendre les meilleures décisions pour l'avenir de leurs enfants.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </div>
+        <h3>Recherche avancée</h3>
+        <p>Filtrez par ville, quartier, niveau, filière, statut, frais et bien plus encore. Trouvez exactement ce que vous cherchez.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3>Carte interactive</h3>
+        <p>Visualisez les établissements sur une carte, calculez les itinéraires et trouvez les écoles les plus proches de chez vous.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        </div>
+        <h3>Informations vérifiées</h3>
+        <p>Chaque fiche est validée par notre équipe. Les établissements peuvent mettre à jour leurs données en temps réel.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Comparaison côte à côte</h3>
+        <p>Sélectionnez plusieurs établissements et comparez leurs caractéristiques, tarifs et avis sur un tableau clair.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h3>Avis et évaluations</h3>
+        <p>Des retours authentiques de parents et d'anciens élèves pour vous aider à choisir en toute confiance.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <h3>Espace établissement</h3>
+        <p>Chaque école dispose d'un tableau de bord pour gérer sa fiche, publier des annonces et mettre à jour ses données d'inscription.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMPARE PREVIEW ────────────────────────────────── -->
+<section id="comparer">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-eyebrow">Outil de comparaison</div>
+      <h2 class="section-title">Comparez les établissements<br>côte à côte</h2>
+      <p class="section-sub">Prenez des décisions éclairées grâce à une comparaison claire et exhaustive.</p>
+    </div>
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Critère</th>
+            <th><div class="school-col-header"><span class="school-col-name">CS Élite Excellence</span><span class="school-col-type">Privé · Kaloum</span></div></th>
+            <th><div class="school-col-header"><span class="school-col-name">Lycée de Ratoma</span><span class="school-col-type">Public · Ratoma</span></div></th>
+            <th><div class="school-col-header"><span class="school-col-name">CS Ismaël Diallo</span><span class="school-col-type">Privé · Dixinn</span></div></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Note globale</td><td><span class="stars">★★★★★</span> 4.8</td><td><span class="stars">★★★★</span>☆ 4.5</td><td><span class="stars">★★★★</span>☆ 4.6</td></tr>
+          <tr><td>Niveau</td><td>Collège + Lycée</td><td>Lycée uniquement</td><td>Collège</td></tr>
+          <tr><td>Frais annuels</td><td>1 200 000 GNF</td><td>Gratuit</td><td>600 000 GNF</td></tr>
+          <tr><td>Nombre d'élèves</td><td>1 240</td><td>2 080</td><td>860</td></tr>
+          <tr><td>Internat</td><td><span class="check">✓</span> Disponible</td><td><span class="cross">✗</span> Non</td><td><span class="cross">✗</span> Non</td></tr>
+          <tr><td>Cantine</td><td><span class="check">✓</span> Disponible</td><td><span class="check">✓</span> Disponible</td><td><span class="check">✓</span> Disponible</td></tr>
+          <tr><td>Transport scolaire</td><td><span class="check">✓</span> Disponible</td><td><span class="cross">✗</span> Non</td><td><span class="cross">✗</span> Non</td></tr>
+          <tr><td>Filières spéciales</td><td>Sciences, Lettres</td><td>Sciences uniquement</td><td>Franco-arabe</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="view-all">
+      <a href="#" class="btn btn-outline btn-lg">Comparer d'autres établissements</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── MAP ────────────────────────────────────── -->
+<section class="bg-surface" id="carte">
+  <div class="container">
+    <div class="section-header" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:36px">
+      <div>
+        <div class="section-eyebrow">Carte interactive</div>
+        <h2 class="section-title">Les établissements près de chez vous</h2>
+      </div>
+      <a href="#" class="btn btn-outline">Ouvrir la carte complète →</a>
+    </div>
+    <div class="map-preview-wrap">
+      <div class="map-bg"></div>
+      <div class="map-grid"></div>
+      <div class="map-roads"></div>
+      <!-- Pins -->
+      <div class="map-pin" style="top:38%;left:42%">
+        <div class="pin-dot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+        <div class="pin-label">CS Élite Excellence</div>
+      </div>
+      <div class="map-pin" style="top:55%;left:62%">
+        <div class="pin-dot" style="background:#059669"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+        <div class="pin-label">Lycée Ratoma</div>
+      </div>
+      <div class="map-pin" style="top:30%;left:68%">
+        <div class="pin-dot" style="background:#7C3AED"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+        <div class="pin-label">CS Ismaël Diallo</div>
+      </div>
+      <div class="map-pin" style="top:65%;left:30%">
+        <div class="pin-dot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+        <div class="pin-label">École Primaire A.</div>
+      </div>
+      <!-- Map UI -->
+      <div class="map-ui">
+        <div class="map-search-bar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          Rechercher sur la carte…
+        </div>
+        <div class="map-controls">
+          <button class="map-ctrl-btn">+</button>
+          <button class="map-ctrl-btn">−</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ────────────────────────────────── -->
+<section>
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-eyebrow">Témoignages</div>
+      <h2 class="section-title">Ce que disent les familles</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <span class="quote-mark">"</span>
+        <p class="testimonial-text">Grâce à WorldSchool, j'ai pu comparer 4 collèges en moins d'une heure et choisir celui qui correspondait le mieux à notre budget et aux besoins de mon fils. Un outil indispensable.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:#2563EB">AF</div>
+          <div><div class="author-name">Aïssatou Fofana</div><div class="author-role">Mère d'élève, Conakry</div></div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <span class="quote-mark">"</span>
+        <p class="testimonial-text">La carte interactive nous a aidés à trouver un lycée à moins de 10 minutes de chez nous avec un programme scientifique. Les informations étaient exactes et à jour.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:#059669">MB</div>
+          <div><div class="author-name">Mamadou Barry</div><div class="author-role">Parent, Ratoma</div></div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <span class="quote-mark">"</span>
+        <p class="testimonial-text">Notre école a rejoint WorldSchool il y a 6 mois. Les demandes d'inscription ont augmenté de 40%. Le tableau de bord est simple et efficace pour mettre nos informations à jour.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:#7C3AED">DS</div>
+          <div><div class="author-name">Directeur Soumah</div><div class="author-role">Proviseur, CS Excellence</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ────────────────────────────────────── -->
+<section class="cta-section">
+  <div class="container" style="position:relative;z-index:1">
+    <div class="section-eyebrow" style="color:#93C5FD;text-align:center;margin-bottom:14px">Prêt à commencer ?</div>
+    <h2 class="section-title">Trouvez le bon établissement<br>pour votre enfant aujourd'hui</h2>
+    <p class="section-sub">Rejoignez des milliers de familles qui font confiance à WorldSchool pour prendre les meilleures décisions éducatives.</p>
+    <div class="cta-btns">
+      <a href="#recherche" class="btn btn-primary btn-xl">Rechercher une école</a>
+      <button class="btn btn-xl" style="background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2)" onclick="openModal('register')">Inscrire mon établissement</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo" onclick="showPage('home')">
+          <div class="logo-mark"><svg viewBox="0 0 24 24" fill="white"><path d="M12 3L2 8l10 5 10-5-10-5z"/></svg></div>
+          <span class="logo-text">World<span style="color:#93C5FD">School</span></span>
+        </a>
+        <p>La référence nationale pour la recherche d'établissements scolaires. Des informations vérifiées pour des choix éclairés.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explorer</h4>
+        <ul>
+          <li><a href="#">Rechercher</a></li>
+          <li><a href="#">Carte interactive</a></li>
+          <li><a href="#">Comparaison</a></li>
+          <li><a href="#">Avis & Notes</a></li>
+          <li><a href="#">Blog éducatif</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Établissements</h4>
+        <ul>
+          <li><a href="#">Inscrire mon école</a></li>
+          <li><a href="#">Espace école</a></li>
+          <li><a href="#">Publier des annonces</a></li>
+          <li><a href="#">Statistiques</a></li>
+          <li><a href="#">Guide de démarrage</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>À propos</h4>
+        <ul>
+          <li><a href="#">Qui sommes-nous</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Conditions d'utilisation</a></li>
+          <li><a href="#">Politique de confidentialité</a></li>
+          <li><a href="#">Aide</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 WorldSchool. Tous droits réservés.</p>
+      <div class="footer-links">
+        <a href="#">Confidentialité</a>
+        <a href="#">Conditions</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div><!-- end home-page -->
+
+<!-- ══════════════════════════════════════════════
+     DETAIL PAGE
+═══════════════════════════════════════════════ -->
+<div id="detail-page">
+<div class="detail-hero">
+  <div class="detail-hero-inner">
+    <button class="back-link" onclick="showPage('home')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Retour aux résultats
+    </button>
+    <div class="detail-header">
+      <div class="detail-logo-box">🏫</div>
+      <div class="detail-title-group">
+        <div class="detail-verified">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+          Établissement vérifié
+        </div>
+        <div class="detail-name">Complexe Scolaire Élite Excellence</div>
+        <div class="detail-meta-row">
+          <span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Kaloum, Conakry
+          </span>
+          <span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            Collège · Lycée
+          </span>
+          <span>Privé laïc</span>
+          <span style="color:#F59E0B">★★★★★ 4.8 (124 avis)</span>
+        </div>
+        <div class="detail-actions">
+          <a href="tel:+224" class="btn btn-primary btn-sm">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67 2 2 0 012-2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 6.67a16 16 0 006 6l.88-.88a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7a2 2 0 011.72 2z"/></svg>
+            Appeler
+          </a>
+          <a href="#" class="btn btn-sm" style="background:rgba(255,255,255,0.12);color:white;border:1px solid rgba(255,255,255,0.2)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Itinéraire
+          </a>
+          <a href="#" class="btn btn-sm" style="background:rgba(255,255,255,0.12);color:white;border:1px solid rgba(255,255,255,0.2)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+            Site web
+          </a>
+          <a href="#" class="btn btn-sm" style="background:rgba(255,255,255,0.12);color:white;border:1px solid rgba(255,255,255,0.2)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Partager
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="detail-tabs">
+      <button class="detail-tab active">Présentation</button>
+      <button class="detail-tab">Photos</button>
+      <button class="detail-tab">Programmes</button>
+      <button class="detail-tab">Avis (124)</button>
+      <button class="detail-tab">Annonces</button>
+    </div>
+  </div>
+</div>
+
+<div class="detail-body">
+  <div class="detail-grid">
+    <div class="detail-main">
+
+      <div class="detail-card">
+        <h3>À propos de l'établissement</h3>
+        <p style="font-size:0.9rem;color:var(--slate);line-height:1.8;margin-bottom:16px">
+          Le Complexe Scolaire Élite Excellence est un établissement privé laïc fondé en 1998, situé au cœur de Kaloum à Conakry. Il accueille des élèves du collège (6e à 3e) et du lycée (2de à Terminale) dans un cadre moderne et stimulant. L'établissement est reconnu pour la qualité de son corps enseignant et ses excellents résultats au baccalauréat.
+        </p>
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Directeur</div><div class="info-value">M. Ibrahima Kouyaté</div></div>
+          <div class="info-item"><div class="info-label">Année de création</div><div class="info-value">1998</div></div>
+          <div class="info-item"><div class="info-label">Nombre d'élèves</div><div class="info-value">1 240 élèves</div></div>
+          <div class="info-item"><div class="info-label">Corps enseignant</div><div class="info-value">68 professeurs</div></div>
+          <div class="info-item"><div class="info-label">Frais de scolarité</div><div class="info-value">1 200 000 GNF/an</div></div>
+          <div class="info-item"><div class="info-label">Horaires</div><div class="info-value">Lun–Ven 7h30–15h30</div></div>
+          <div class="info-item"><div class="info-label">Statut</div><div class="info-value">Privé laïc</div></div>
+          <div class="info-item"><div class="info-label">Niveaux</div><div class="info-value">6e → Terminale</div></div>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <h3>Services et équipements</h3>
+        <div class="amenity-list">
+          <div class="amenity-item"><span class="amenity-name">🍽️ Cantine scolaire</span><span class="badge-yes">Disponible</span></div>
+          <div class="amenity-item"><span class="amenity-name">🏠 Internat</span><span class="badge-yes">Disponible</span></div>
+          <div class="amenity-item"><span class="amenity-name">🚌 Transport scolaire</span><span class="badge-yes">Disponible</span></div>
+          <div class="amenity-item"><span class="amenity-name">💻 Salle informatique</span><span class="badge-yes">Disponible</span></div>
+          <div class="amenity-item"><span class="amenity-name">📚 Bibliothèque</span><span class="badge-yes">Disponible</span></div>
+          <div class="amenity-item"><span class="amenity-name">⚽ Terrain de sport</span><span class="badge-yes">Disponible</span></div>
+          <div class="amenity-item"><span class="amenity-name">🔬 Laboratoire</span><span class="badge-yes">Disponible</span></div>
+          <div class="amenity-item"><span class="amenity-name">♿ Accès handicapé</span><span class="badge-no">Non disponible</span></div>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <h3>Conditions d'admission</h3>
+        <p style="font-size:0.875rem;color:var(--slate);line-height:1.75">
+          L'admission se fait sur dossier comprenant : les bulletins des deux dernières années, un extrait de naissance, une copie de la carte d'identité du parent tuteur, et deux photos d'identité. Les inscriptions pour l'année 2025-2026 sont ouvertes du 15 juin au 31 août 2025.
+        </p>
+        <div style="margin-top:16px;padding:14px;background:var(--blue-pale);border-radius:10px;border-left:3px solid var(--blue)">
+          <div style="font-size:0.8rem;font-weight:700;color:var(--blue);margin-bottom:4px">📅 Inscriptions ouvertes</div>
+          <div style="font-size:0.85rem;color:var(--navy)">Du 15 juin au 31 août 2025 — Places limitées</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div>
+      <div class="sidebar-card">
+        <h4>Informations de contact</h4>
+        <div class="contact-list">
+          <div class="contact-item">
+            <div class="contact-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67 2 2 0 012-2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 6.67a16 16 0 006 6l.88-.88a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7a2 2 0 011.72 2z"/></svg></div>
+            +224 620 00 00 00
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            contact@elite-excellence.gn
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            Quartier Almamya, Kaloum, Conakry
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+            Lun–Ven : 7h30 – 15h30
+          </div>
+        </div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:16px">Contacter l'établissement</button>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>Note globale</h4>
+        <div class="rating-display">
+          <div class="rating-big">4.8</div>
+          <div class="rating-stars">★★★★★</div>
+          <div class="rating-count">Basé sur 124 avis</div>
+        </div>
+        <div class="rating-bars">
+          <div class="rating-bar-row">5 ★<div class="rating-bar"><div class="rating-bar-fill" style="width:78%"></div></div>78%</div>
+          <div class="rating-bar-row">4 ★<div class="rating-bar"><div class="rating-bar-fill" style="width:14%"></div></div>14%</div>
+          <div class="rating-bar-row">3 ★<div class="rating-bar"><div class="rating-bar-fill" style="width:5%"></div></div>5%</div>
+          <div class="rating-bar-row">2 ★<div class="rating-bar"><div class="rating-bar-fill" style="width:2%"></div></div>2%</div>
+          <div class="rating-bar-row">1 ★<div class="rating-bar"><div class="rating-bar-fill" style="width:1%"></div></div>1%</div>
+        </div>
+        <button class="btn btn-outline" style="width:100%;justify-content:center;margin-top:16px">Laisser un avis</button>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>Ajouter à la comparaison</h4>
+        <p style="font-size:0.82rem;color:var(--slate);margin-bottom:14px">Comparez cet établissement avec d'autres.</p>
+        <button class="btn btn-secondary btn-sm" style="width:100%;justify-content:center">
+          + Ajouter à la comparaison
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- end detail-page -->
+
+<!-- ══════════════════════════════════════════════
+     ADMIN PAGE
+═══════════════════════════════════════════════ -->
+<div id="admin-page">
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="admin-nav-label">Principal</div>
+      <button class="admin-nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Tableau de bord
+      </button>
+      <button class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        Établissements
+      </button>
+      <button class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        Utilisateurs
+      </button>
+      <button class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Avis à modérer
+      </button>
+      <div class="admin-nav-label">Analytique</div>
+      <button class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Statistiques
+      </button>
+      <button class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Trafic
+      </button>
+      <div class="admin-nav-label">Gestion</div>
+      <button class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M17.66 17.66l1.41 1.41M4.93 4.93l1.41 1.41M6.34 17.66l-1.41 1.41M2 12h2M20 12h2M12 2v2M12 20v2"/></svg>
+        Paramètres
+      </button>
+      <div style="margin-top:auto;padding-top:24px">
+        <button class="admin-nav-item" onclick="showPage('home')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          Retour au site
+        </button>
+      </div>
+    </aside>
+
+    <main class="admin-content">
+      <div class="admin-page-header">
+        <div class="admin-page-title">Tableau de bord</div>
+        <button class="btn btn-primary btn-sm" onclick="openModal('addSchool')">+ Ajouter un établissement</button>
+      </div>
+
+      <div class="admin-stats">
+        <div class="admin-stat-card">
+          <div class="admin-stat-num">1 240</div>
+          <div class="admin-stat-label">Établissements</div>
+          <div class="admin-stat-change">↑ +12 ce mois</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-num">52 418</div>
+          <div class="admin-stat-label">Visiteurs ce mois</div>
+          <div class="admin-stat-change">↑ +18% vs mois précédent</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-num">8 234</div>
+          <div class="admin-stat-label">Utilisateurs inscrits</div>
+          <div class="admin-stat-change">↑ +234 cette semaine</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-num">47</div>
+          <div class="admin-stat-label">Avis en attente</div>
+          <div class="admin-stat-change" style="color:#D97706">À modérer</div>
+        </div>
+      </div>
+
+      <div class="admin-table-card">
+        <div class="admin-table-head">
+          <div class="admin-table-title">Derniers établissements ajoutés</div>
+          <a href="#" class="btn btn-ghost btn-sm">Voir tout</a>
+        </div>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Établissement</th>
+              <th>Ville</th>
+              <th>Niveau</th>
+              <th>Statut</th>
+              <th>Ajouté le</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>CS Élite Excellence</strong></td><td>Conakry</td><td>Collège · Lycée</td>
+              <td><span class="status-badge status-active">Actif</span></td><td>12 juin 2025</td>
+              <td><div class="row-actions">
+                <button class="action-btn" title="Modifier"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="action-btn" title="Supprimer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg></button>
+              </div></td>
+            </tr>
+            <tr>
+              <td><strong>Lycée Scientifique Ratoma</strong></td><td>Conakry</td><td>Lycée</td>
+              <td><span class="status-badge status-active">Actif</span></td><td>10 juin 2025</td>
+              <td><div class="row-actions">
+                <button class="action-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="action-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg></button>
+              </div></td>
+            </tr>
+            <tr>
+              <td><strong>École Primaire Al-Nour</strong></td><td>Kindia</td><td>Primaire</td>
+              <td><span class="status-badge status-pending">En attente</span></td><td>9 juin 2025</td>
+              <td><div class="row-actions">
+                <button class="action-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="action-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg></button>
+              </div></td>
+            </tr>
+            <tr>
+              <td><strong>CS Ismaël Diallo</strong></td><td>Conakry</td><td>Collège</td>
+              <td><span class="status-badge status-active">Actif</span></td><td>7 juin 2025</td>
+              <td><div class="row-actions">
+                <button class="action-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="action-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg></button>
+              </div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div><!-- end admin-page -->
+
+<!-- ══════════════════════════════════════════════
+     MODALS
+═══════════════════════════════════════════════ -->
+
+<!-- LOGIN -->
+<div class="modal-overlay" id="modal-login" onclick="if(event.target===this)closeModal('login')">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Connexion à WorldSchool</div>
+      <button class="modal-close" onclick="closeModal('login')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Adresse email</label>
+        <input class="form-input" type="email" placeholder="vous@exemple.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Mot de passe</label>
+        <input class="form-input" type="password" placeholder="••••••••">
+      </div>
+      <div style="text-align:right;font-size:0.8rem"><a href="#" style="color:var(--blue);text-decoration:none">Mot de passe oublié ?</a></div>
+      <div class="form-divider">ou</div>
+      <button class="btn btn-outline" style="width:100%;justify-content:center;gap:8px">
+        <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        Continuer avec Google
+      </button>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('login')">Annuler</button>
+      <button class="btn btn-primary">Se connecter</button>
+    </div>
+  </div>
+</div>
+
+<!-- REGISTER -->
+<div class="modal-overlay" id="modal-register" onclick="if(event.target===this)closeModal('register')">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Inscrire mon établissement</div>
+      <button class="modal-close" onclick="closeModal('register')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Nom officiel de l'établissement</label>
+        <input class="form-input" type="text" placeholder="Ex : Lycée Scientifique de…">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Votre nom et prénom</label>
+        <input class="form-input" type="text" placeholder="Responsable ou directeur">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email professionnel</label>
+        <input class="form-input" type="email" placeholder="direction@etablissement.gn">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Téléphone</label>
+        <input class="form-input" type="tel" placeholder="+224 6XX XX XX XX">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('register')">Annuler</button>
+      <button class="btn btn-primary">Soumettre la demande</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD SCHOOL (Admin) -->
+<div class="modal-overlay" id="modal-addSchool" onclick="if(event.target===this)closeModal('addSchool')">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Ajouter un établissement</div>
+      <button class="modal-close" onclick="closeModal('addSchool')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Nom officiel</label>
+        <input class="form-input" type="text" placeholder="Nom de l'établissement">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="form-group">
+          <label class="form-label">Ville</label>
+          <input class="form-input" type="text" placeholder="Conakry">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Quartier</label>
+          <input class="form-input" type="text" placeholder="Kaloum">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Niveau scolaire</label>
+        <select class="form-input">
+          <option>Maternelle</option><option>Primaire</option>
+          <option>Collège</option><option>Lycée</option>
+          <option>Université</option><option>Formation professionnelle</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Statut</label>
+        <select class="form-input">
+          <option>Public</option><option>Privé laïc</option>
+          <option>Privé confessionnel</option><option>International</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('addSchool')">Annuler</button>
+      <button class="btn btn-primary">Ajouter l'établissement</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Navigation ──────────────────────────────
+function showPage(page) {
+  document.getElementById('home-page').classList.toggle('hidden', page !== 'home');
+  document.getElementById('detail-page').classList.toggle('active', page === 'detail');
+  document.getElementById('admin-page').classList.toggle('active', page === 'admin');
+  document.getElementById('detail-page').style.display = page === 'detail' ? 'block' : 'none';
+  document.getElementById('admin-page').style.display = page === 'admin' ? 'flex' : 'none';
+  window.scrollTo(0, 0);
+}
+
+// ── Modals ──────────────────────────────────
+function openModal(name) {
+  document.getElementById('modal-' + name).classList.add('open');
+}
+function closeModal(name) {
+  document.getElementById('modal-' + name).classList.remove('open');
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open'));
+  }
+});
+
+// ── Filter chips ────────────────────────────
+document.querySelectorAll('.filter-chip').forEach(chip => {
+  chip.addEventListener('click', function() {
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// ── Tabs ────────────────────────────────────
+document.querySelectorAll('.detail-tab').forEach(tab => {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
