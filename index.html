@@ -1733,5 +1733,20 @@ document.querySelectorAll('.detail-tab').forEach(tab => {
   });
 });
 </script>
-</body>
+</body><script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyASgFrSj6dgDVxKNfZEHVpcMkFPJvtzGfI",
+    authDomain: "worldschool-3fd49.firebaseapp.com",
+    projectId: "worldschool-3fd49",
+    storageBucket: "worldschool-3fd49.firebasestorage.app",
+    messagingSenderId: "422744114561",
+    appId: "1:422744114561:web:ef19e5664f2558ddaed480"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+  console.log("Firebase connecté !");
+</script>
 </html>
